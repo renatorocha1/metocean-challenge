@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      args:
+        user: dev
+        uid: 1000
+      context: ./
+      dockerfile: ./Dockerfile
+    image: renatorocha1/laravel8
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    restart: always
+    depends_on:
+      - redis
+    networks:
+      - app
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 8081:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - app
+  redis:
+    image: redis:latest
+    networks:
+      - app
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
