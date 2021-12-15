@@ -45,9 +45,9 @@ class DataController extends Controller
             $file_open = fopen($file_path, 'r');
             $file_content = fread($file_open, filesize($file_path));
             $file_rows = explode(PHP_EOL, $file_content);
-            $columns = $this->getFormattedColumnsFromFile($file_rows);
+            $columns = $this->parseColumnsFromFile($file_rows);
 
-            $rows = $this->getFormattedRowsFromFile($file_rows, $columns);
+            $rows = $this->parseRowsFromFile($file_rows, $columns);
             if (!$rows || $rows["status"] == false) {
                 return Response()->status(401)->json($rows);
             }
@@ -56,7 +56,7 @@ class DataController extends Controller
                 Data::updateOrCreate($row, $row);
             });
 
-            $info = $this->getFormattedDescriptionFromFile($file_rows, $rows["line_of_info"]);
+            $info = $this->parseDescriptionFromFile($file_rows, $rows["line_of_info"]);
             if (count($info["data"]) >= 1) {
                 collect($info["data"])->each(function ($row) {
                     Info::updateOrCreate($row, $row);
@@ -69,7 +69,7 @@ class DataController extends Controller
         }
     }
 
-    private function getFormattedColumnsFromFile($rows)
+    private function parseColumnsFromFile($rows)
     {
         $arr_columns = [];
         if ($rows && count($rows) > 0) {
@@ -89,7 +89,7 @@ class DataController extends Controller
         return $arr_columns;
     }
 
-    private function getFormattedRowsFromFile($file_rows, $header)
+    private function parseRowsFromFile($file_rows, $header)
     {
         // ignore header file
         $line_of_content = 2;
@@ -135,7 +135,7 @@ class DataController extends Controller
         ];
     }
 
-    private function getFormattedDescriptionFromFile($file_rows, $line_of_info)
+    private function parseDescriptionFromFile($file_rows, $line_of_info)
     {
         // ignore header file
         $rows = array_slice($file_rows, $line_of_info);

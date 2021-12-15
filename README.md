@@ -1,66 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h4 align="center">
+  MetOcean Challenge
+</h4>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="#-preview">Preview</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologies">Tecnologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-api-docummentation">API Docummentation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-deploy-it-with-docker">How to deploy it with docker</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
 </p>
 
-## About Laravel
+<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Preview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+You could see this project on the link [MetOcean - Challlenge](https://metocean-challenge.herokuapp.com)
+<p align="center">
+<img alt="Endpoint POST DATA Request Body" src=".github/preview.gif">
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 💻 Tecnologies
 
-## Learning Laravel
+This project was developed with the following tecnologies:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [Laravel](https://laravel.com)
+- [Vue](https://vuejs.org/v2/guide/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [D3](https://d3js.org/)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔖 Project
 
-## Laravel Sponsors
+This project was developed with the objective of implementing an api to import data from a txt file and provide them to a frontend where it is possible to visualize and manipulate the data.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Project structure
+Currently, the project was implemented following a MVC (Model View Controller) structure, the frontend is inserted within the context of laravel just to facilitate the deployment process for heroku, but it would be possible to remove the frontend from the context of laravel for more versatility.
 
-### Premium Partners
+## Infrastructure
+Currently the project is implemented in heroku in a dyno-free but the application is distributed over containers using the docker, where it is possible to have stability and proximity to similar environments for development and production.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+## Frontend
+I used the frontend with Vuejs and D3js to render the visualization of the data obtained by the API and using Vuex to manage the app state, centralizing the information in the app state so that the components can benefit from it, reducing the requests for the api.
 
-## Contributing
+## API
+The API was developed using the REST API framework without JWT authentication. It has a resource with two methods that can be consumed.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### API - Available resources
+There is currently only one resource below that you can manipulate through the methods. **GET**, **POST**:
 
-## Code of Conduct
+- Data (data)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### API - Data processing
+All data sent and received by the API must be in JSON format (application/json).
 
-## Security Vulnerabilities
+### API - Authentication
+Currently none of the methods require authentication.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### API - Endpoints
+**API BASE URL** `https://metocean-challenge.herokuapp.com/api`
 
-## License
+#### Endpoint: /data [POST]
+This method allows you to insert or update data in the database, based on the .txt file sent in the body of your request.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Example request body
+<img alt="Endpoint POST DATA Request Body" src=".github/endpoint-post-data-request-body.png">
+
+- Example response body
+<img alt="Endpoint POST DATA Response Body" src=".github/endpoint-post-data-response-body.png">
+
+#### Endpoint: /data [GET]
+This method returns data from the database in which it is also possible to filter the data by entering some parameters via query strings.
+
+Example request
+<img alt="Endpoint GET DATA Request Body" src=".github/endpoint-get-data-request.png">
+
+Example response body
+<img alt="Endpoint GET DATA Response Body" src=".github/endpoint-get-data-response-body.png">
+
+## 🤔 How to deploy it with docker
+- [Install docker](https://www.docker.com/get-started)
+- Open your terminal and go to the project path
+- Run the command `docker-compose up -d`
+- Create your database inside the container `docker-compose exec mysql bash`
+- Create a new file .env with your variables;
+- Install dependencies by running the command `docker-compose exec app composer install`
+- Run the database migrations by using the command `docker-compose exec app php artisan migrate`
+- Access your project using the url `http//localhost:8081`
+
+## :memo: License
+
+This project is under MIT license. See the [LICENSE](LICENSE.md) for more details.

@@ -1,3 +1,9 @@
 body {
   color: #fff;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  filter: invert(1);
+}

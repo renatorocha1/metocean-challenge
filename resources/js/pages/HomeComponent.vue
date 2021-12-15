@@ -4,9 +4,8 @@
       <div class="col text-center">
         <h1>MetOcean Challenge</h1>
         <p>
-          This is a <strong>sample page</strong> to view an
-          <strong>example of reported data</strong> which contain informations
-          about meteorology and oceanography provided by MetOcean.
+          This is a sample page to see an example of reported data that contains
+          meteorology and oceanography information provided by MetOcean.
         </p>
       </div>
     </div>
