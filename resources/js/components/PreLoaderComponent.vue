@@ -1,0 +1,7 @@
+<template>
+  <div class="d-flex justify-content-center mt-3 mb-3">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</template>

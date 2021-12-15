@@ -1,0 +1,27 @@
+// Body
+$body-bg: #04050e;
+$body-color: #fff;
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Forms
+$input-color: $body-color;
+$input-bg: #13132c;
+$input-plaintext-color: $body-color;
+$input-group-addon-color: $body-color;
+$input-group-addon-bg: $body-color;
+$input-group-addon-border-color: $body-color;
+
+// Card
+$card-cap-bg: rgba($body-bg, 0.03);
+$card-cap-color: $body-color;
+$card-border-color: rgba($body-bg, 0.125);
+$card-color: $body-color;
+$card-bg: $body-bg;
+
+// List group
+$list-group-color: $body-color;
+$list-group-bg: $body-color;
+$list-group-border-color: rgba($body-color, 0.125);

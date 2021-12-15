@@ -1,0 +1,6 @@
+// vetur config
+{
+    "include": [
+        "./resources/js/**/*"
+    ]
+}

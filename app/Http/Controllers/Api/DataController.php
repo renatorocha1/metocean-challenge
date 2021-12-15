@@ -27,8 +27,15 @@ class DataController extends Controller
                     return $query->whereIn('label', [$params["labels"]]);
                 }
             })
+            ->orderBy('happened_at', 'asc')
             ->get();
-        return Response()->json($data);
+        $info = Info::select(["name", "info"])->orderBy("name", "asc")->get();
+
+        $result = [
+            "info" => $info,
+            "items" => $data
+        ];
+        return Response()->json($result);
     }
 
     public function store(Request $request)
@@ -46,26 +53,19 @@ class DataController extends Controller
             }
 
             collect($rows["data"])->each(function ($row) {
-                try {
-                    Data::updateOrCreate($row, $row);
-                } catch (\Throwable $th) {
-                    return Response()->status(500)->json(["status" => true, "msg" => $th]);
-                }
+                Data::updateOrCreate($row, $row);
             });
 
-            $info = $this->getFormmatedDescriptionFromFile($file_rows, $rows["line_of_info"]);
+            $info = $this->getFormattedDescriptionFromFile($file_rows, $rows["line_of_info"]);
             if (count($info["data"]) >= 1) {
                 collect($info["data"])->each(function ($row) {
-                    try {
-                        Info::updateOrCreate($row, $row);
-                    } catch (\Throwable $th) {
-                        return Response()->status(500)->json(["status" => true, "msg" => $th]);
-                    }
+                    Info::updateOrCreate($row, $row);
                 });
             }
             return Response()->json(["status" => true, "msg" => "Your file was imported!"]);
-        } catch (\Throwable $th) {
-            return Response()->status(500)->json(["status" => true, "msg" => $th]);
+        } catch (\Exception $e) {
+            dd($e);
+            return Response()->status(500)->json(["status" => true, "msg" => $e]);
         }
     }
 
@@ -135,7 +135,7 @@ class DataController extends Controller
         ];
     }
 
-    private function getFormmatedDescriptionFromFile($file_rows, $line_of_info)
+    private function getFormattedDescriptionFromFile($file_rows, $line_of_info)
     {
         // ignore header file
         $rows = array_slice($file_rows, $line_of_info);
